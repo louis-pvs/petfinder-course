@@ -1,3 +1,3 @@
-export { findDisplayImage } from "./findDisplayImage";
+export { findDisplayImages } from "./findDisplayImages";
 export { findPetResponse } from "./findPetResponse";
 export { combineBreed } from "./combineBreed";
