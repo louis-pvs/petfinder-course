@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "@reach/router";
-import { findImage } from "./utils";
+import { findDisplayImages, combineBreed } from "./utils";
 
 TableRow.propTypes = {
   pet: PropTypes.shape({
@@ -22,23 +22,21 @@ TableRow.propTypes = {
 };
 
 function TableRow({ pet }) {
-  function combineBreed({ breeds }) {
-    if (!breeds || !breeds.breed) return null;
-    const { breed } = breeds;
-    if (Array.isArray(breed)) return breed.join(", ");
-    return breed;
-  }
   return (
     <tr>
       <td>
         <Link to={`details/${pet.id}`}>
-          <img height="80" src={findImage(pet)} alt={pet.name} />
+          <img
+            height="80"
+            src={findDisplayImages(pet.media)[0].value}
+            alt={pet.name}
+          />
           <span>{pet.name}</span>
         </Link>
       </td>
       <td />
       <td>{pet.animal}</td>
-      <td>{combineBreed(pet)}</td>
+      <td>{combineBreed(pet.breeds)}</td>
       <td>
         {pet.contact.city} {pet.contact.state}
       </td>
