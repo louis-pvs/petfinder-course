@@ -10,8 +10,9 @@
     "dev": "parcel src/index.html"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.2",
+    "@babel/core": "^7.0.0-0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.6.1",
     "eslint-config-prettier": "^3.1.0",
