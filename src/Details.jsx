@@ -1,14 +1,8 @@
 import React from "react";
-import pfClient from "petfinder-client";
 import PropTypes from "prop-types";
-import { findPetResponse, findDisplayImages, combineBreed } from "./utils";
+import { findPetResponse, combineBreed, petfinder } from "./utils";
 import { navigate } from "@reach/router";
 import Carousel from "./Carousel";
-
-const petfinder = pfClient({
-  key: process.env.API_KEY,
-  secret: process.env.API_SECRET
-});
 
 class Details extends React.PureComponent {
   static propTypes = {

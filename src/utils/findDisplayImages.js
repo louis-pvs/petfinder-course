@@ -4,7 +4,7 @@
  * @returns {string} image src
  */
 function findDisplayImages(media) {
-  if (!media || !media.photos || !media.photos.photo) return null;
+  if (!media || !media.photos || !media.photos.photo) return [{ value: "" }];
   const { photo } = media.photos;
   return photo.filter(options => options["@size"] === "pn");
 }
