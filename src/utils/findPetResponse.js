@@ -3,7 +3,7 @@
  * @returns {Array} pets - extract out pets data from API
  */
 function findPetResponse(data) {
-  if (!data.petfinder || !data.petfinder) return null;
+  if (!data.petfinder || !data.petfinder) return [];
   const { pet, pets } = data.petfinder;
   if (pet) return [pet];
   else if (!!pets && !!pets.pet) return pets.pet;
