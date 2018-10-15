@@ -7,7 +7,7 @@ SelectInput.propTypes = {
   value: PropTypes.any,
   onSelect: PropTypes.func,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
-  disabled: PropTypes.boolean
+  disabled: PropTypes.bool
 };
 
 export default function SelectInput({

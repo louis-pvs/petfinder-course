@@ -1,54 +1,61 @@
-import React, { Fragment } from "react";
-
+import React from "react";
+import PropTypes from "prop-types";
 import TableRow from "./TableRow";
 import SearchBar from "./SearchBar";
-import { findPetResponse, petfinder } from "./utils";
-
+import { Consumer } from "./context/SearchContext";
 class Results extends React.PureComponent {
-  state = { pets: [], errors: {}, loading: true };
+  static propTypes = {
+    handleSearch: PropTypes.func,
+    loading: PropTypes.bool,
+    pets: PropTypes.array,
+    errors: PropTypes.shape({
+      message: PropTypes.string
+    })
+  };
   componentDidMount = () => {
-    this.handleSearch();
-  };
-  handleSearch = searchParams => {
-    this.setState({ loading: true });
-    const promise = petfinder.pet.find({
-      output: "full",
-      location: "Seattle, WA",
-      ...searchParams
-    });
-    promise.then(this.handleFindPetResponse);
-  };
-  handleFindPetResponse = data => {
-    this.setState({ pets: findPetResponse(data), loading: false });
+    this.props.handleSearch();
   };
   renderTableRow(pet) {
     return <TableRow pet={pet} key={pet.id} />;
   }
   renderTable() {
-    if (this.state.loading) return <p>loading</p>;
-    if (!this.state.pets) {
+    if (this.props.loading) return <p>loading</p>;
+    if (!this.props.pets) {
       return (
         <p>
           No Animal found :(
-          <button onClick={this.handleSearch}>clear filter</button>
+          <button onClick={this.props.handleSearch}>clear filter</button>
         </p>
       );
     }
     return (
       <table>
-        {this.state.errors.message}
-        <tbody>{this.state.pets.map(this.renderTableRow)}</tbody>
+        {this.props.errors.message}
+        <tbody>{this.props.pets.map(this.renderTableRow)}</tbody>
       </table>
     );
   }
   render() {
     return (
-      <Fragment>
-        <SearchBar onSearch={this.handleSearch} />
+      <div>
+        <SearchBar />
         {this.renderTable()}
-      </Fragment>
+      </div>
     );
   }
 }
 
-export default Results;
+export default function ResultsWithContext() {
+  return (
+    <Consumer>
+      {context => (
+        <Results
+          pets={context.pets}
+          handleSearch={context.handleSearch}
+          errors={context.errors}
+          loading={context.loading}
+        />
+      )}
+    </Consumer>
+  );
+}

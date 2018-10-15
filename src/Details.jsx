@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { findPetResponse, combineBreed, petfinder } from "./utils";
 import { navigate } from "@reach/router";
+import SearchBar from "./SearchBar";
 import Carousel from "./Carousel";
 
 class Details extends React.PureComponent {
@@ -32,6 +33,7 @@ class Details extends React.PureComponent {
     } = this.state.pet;
     return (
       <div>
+        <SearchBar />
         <Carousel media={media} name={name} />
         <h2>{name}</h2>
         <h4>{combineBreed(breeds)}</h4>
